@@ -14,10 +14,11 @@ Modern ve kullanıcı dostu bir öğrenci portalı uygulaması. İskenderun Tekn
 ## 🛠️ Teknolojiler
 
 ### Backend
-- **Flask**: Python web framework
+- **Flask 2.3.3**: Python web framework (Python 3.11 uyumlu)
 - **BeautifulSoup4**: HTML/XML parsing için
 - **Playwright**: JavaScript destekli web scraping
 - **Flask-CORS**: Cross-Origin Resource Sharing desteği
+- **Gunicorn**: Production WSGI server
 
 ### Frontend
 - **HTML5 & CSS3**: Modern web standartları
@@ -28,7 +29,7 @@ Modern ve kullanıcı dostu bir öğrenci portalı uygulaması. İskenderun Tekn
 ## 📦 Kurulum
 
 ### Gereksinimler
-- Python 3.8+
+- **Python 3.11.7** (greenlet uyumluluğu için)
 - pip (Python paket yöneticisi)
 
 ### Adımlar
@@ -57,7 +58,7 @@ pip install -r requirements.txt
 
 4. **Playwright tarayıcılarını yükleyin**
 ```bash
-playwright install chromium
+playwright install
 ```
 
 5. **Uygulamayı başlatın**
@@ -67,13 +68,55 @@ python app.py
 
 Uygulama varsayılan olarak `http://localhost:5000` adresinde çalışacaktır.
 
+## 🚀 Deployment Seçenekleri
+
+### 1. Render (Önerilen)
+Render platformunda otomatik deployment için:
+
+1. GitHub repository'nizi Render'a bağlayın
+2. `render.yaml` dosyası otomatik olarak kullanılacaktır
+3. Environment variables'ları Render dashboard'unda ayarlayın
+
+### 2. Heroku
+```bash
+# Heroku CLI ile
+heroku create your-app-name
+git push heroku main
+```
+
+### 3. Docker ile Deployment
+```bash
+# Docker image oluştur
+docker build -t isteapp .
+
+# Container çalıştır
+docker run -p 5000:5000 isteapp
+```
+
+### 4. VPS/Server Deployment
+```bash
+# Setup script çalıştır
+chmod +x setup.sh
+./setup.sh
+
+# Gunicorn ile production'da çalıştır
+gunicorn --bind 0.0.0.0:5000 app:app
+```
+
 ## 📁 Proje Yapısı
 
 ```
 edupro/
 ├── app.py                  # Ana Flask uygulaması
 ├── requirements.txt        # Python bağımlılıkları
-├── README.md              # Proje dokümantasyonu
+├── runtime.txt            # Python versiyonu (3.11.7)
+├── Procfile              # Heroku deployment
+├── render.yaml           # Render deployment
+├── Dockerfile            # Docker deployment
+├── setup.sh              # Deployment setup script
+├── .gitignore            # Git ignore patterns
+├── .dockerignore         # Docker ignore patterns
+├── README.md             # Proje dokümantasyonu
 └── isteapp/
     ├── scraping/
     │   ├── __init__.py
@@ -96,6 +139,8 @@ edupro/
 - `GET /api/duyurular` - Öğrenci duyurularını getirir
 - `GET /api/haberler` - Son haberleri getirir
 - `GET /api/yemek-menusu` - Günlük yemek menüsünü getirir
+- `GET /api/haftalik-yemek-menusu` - Haftalık yemek menüsünü getirir
+- `POST /api/chatbot` - AI chatbot endpoint'i
 
 ## 🎨 Özelleştirme
 
@@ -113,6 +158,16 @@ CSS değişkenlerini `style.css` dosyasında düzenleyerek renk temasını deği
 
 ### Logo Değiştirme
 `isteapp/static/images/iste-logo.png` dosyasını kendi logonuzla değiştirin.
+
+## 🔧 Environment Variables
+
+Production deployment için gerekli environment variables:
+
+```bash
+FLASK_ENV=production
+FLASK_DEBUG=0
+OPENAI_API_KEY=your_openai_api_key_here
+```
 
 ## 🚀 Production Deployment
 
@@ -139,11 +194,23 @@ server {
 }
 ```
 
-## 📝 Notlar
+## ⚠️ Önemli Notlar
 
-- Scraping işlemleri üniversite web sitesinin yapısına bağlıdır. Site değişikliklerinde `scrapers.py` dosyasının güncellenmesi gerekebilir.
-- Yemek menüsü için Playwright kullanılmaktadır çünkü içerik JavaScript ile yüklenmektedir.
-- Veriler 5 dakikada bir otomatik olarak yenilenir.
+### Python Versiyonu
+- **Python 3.11.7** kullanılmaktadır
+- Python 3.13'te greenlet modülü derleme sorunları yaşanabilir
+- `runtime.txt` dosyası Python versiyonunu belirtir
+
+### Dependencies
+- Flask 2.3.3 kullanılmaktadır (3.0.0 yerine)
+- Tüm dependencies Python 3.11 ile uyumludur
+- Playwright browser'ları deployment sırasında otomatik yüklenir
+
+### Scraping İşlemleri
+- Scraping işlemleri üniversite web sitesinin yapısına bağlıdır
+- Site değişikliklerinde `scrapers.py` dosyasının güncellenmesi gerekebilir
+- Yemek menüsü için Playwright kullanılmaktadır (JavaScript içerik)
+- Veriler 5 dakikada bir otomatik olarak yenilenir
 
 ## 🤝 Katkıda Bulunma
 
