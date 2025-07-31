@@ -1,9 +1,4 @@
-Flask==2.3.3
-flask-cors==4.0.0
-requests==2.31.0
-beautifulsoup4==4.12.2
-playwright==1.40.0
-python-dotenv==1.0.0
-gunicorn==21.2.0
-openai==0.28.1
-greenlet==2.0.2
+git add .
+git commit -m "Final: Deploy için tüm yapı hazır"
+git push origin main
+
