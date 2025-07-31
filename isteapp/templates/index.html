@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISTEAPP - İskenderun Teknik Üniversitesi Öğrenci Portalı</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="{{ url_for('static', filename='images/iste_arma (1).png') }}" alt="İSTE Logo" class="logo">
+                    <div class="brand">
+                        <h1 class="brand-name">ISTEAPP</h1>
+                        <p class="brand-tagline">Öğrenci Portalı</p>
+                    </div>
+                </div>
+                <nav class="main-navbar">
+                    <div class="container nav-flex">
+                        <a href="#" class="nav-link scroll-to" data-target="top">Anasayfa</a>
+                        <a href="#" class="nav-link chatbot-nav-btn" id="chatbotNavBtn"><i class="fas fa-robot"></i> Chatbot</a>
+                        <a href="#duyurular-haberler" class="nav-link scroll-to">Duyurular & Haberler</a>
+                        <a href="#yemek-menu" class="nav-link scroll-to">Yemek Menüsü</a>
+                        <a href="#iletisim" class="nav-link scroll-to">İletişim</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title animate-fade-in">Hoş Geldiniz!</h2>
+                <p class="hero-subtitle animate-fade-in-delay">İskenderun Teknik Üniversitesi öğrenci portalına hoş geldiniz.</p>
+                
+                <!-- Quick Access Buttons -->
+                <div class="quick-access animate-slide-up">
+                    <a href="https://obs.iste.edu.tr/" target="_blank" class="quick-btn obs-btn"><i class="fas fa-graduation-cap"></i><span>OBS</span><small>Öğrenci Bilgi Sistemi</small></a>
+                    <a href="https://ubom.iste.edu.tr/login/index.php" target="_blank" class="quick-btn lms-btn"><i class="fas fa-desktop"></i><span>UBOM</span><small>Öğrenme Yönetim Sistemi</small></a>
+                    <a href="https://eposta.iste.edu.tr/" target="_blank" class="quick-btn email-btn"><i class="fas fa-envelope"></i><span>E-Posta</span><small>Kurumsal E-posta</small></a>
+                    <a href="https://kutuphane.iste.edu.tr/" target="_blank" class="quick-btn library-btn"><i class="fas fa-book"></i><span>Kütüphane</span><small>Üniversite Kütüphanesi</small></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <section id="duyurular-haberler"></section>
+            <div class="content-grid">
+                <!-- Duyurular Section -->
+                <section class="content-section" id="duyurular">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-bullhorn"></i>
+                            Güncel Duyurular
+                        </h3>
+                        <a href="
+                        https://iste.edu.tr/duyuru-merkezi/ogrenci" target="_blank" class="see-all">
+                            Tümünü Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="announcements-container" id="announcementsContainer">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Duyurular yükleniyor...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Haberler Section -->
+                <section class="content-section" id="haberler">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-newspaper"></i>
+                            Son Haberler
+                        </h3>
+                        <a href="https://iste.edu.tr/haber-merkezi" target="_blank" class="see-all">
+                            Tümünü Gör <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="news-container" id="newsContainer">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Haberler yükleniyor...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Yemek Menüsü Section -->
+                <section class="content-section full-width" id="yemek-menu">
+                    <div class="section-header">
+                        <h3 class="section-title">
+                            <i class="fas fa-utensils"></i>
+                            Yemek Menüsü
+                        </h3>
+                        <div class="menu-toggle">
+                            <button id="gunlukMenuBtn" class="menu-btn active">Günlük</button>
+                            <button id="haftalikMenuBtn" class="menu-btn">Haftalık</button>
+                        </div>
+                    </div>
+                    <div class="menu-container" id="menuContainer">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Menü yükleniyor...</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- İletişim Section -->
+    <section class="contact-section" id="iletisim">
+        <div class="container">
+            <h3 class="section-title">
+                <i class="fas fa-phone-alt"></i>
+                İletişim Bilgileri
+            </h3>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Adres</h4>
+                    <p>İskenderun Teknik Üniversitesi<br>
+                    31200 İskenderun/HATAY</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h4>Telefon</h4>
+                    <p>+90 326 613 56 00</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>E-posta</h4>
+                    <p>bilgi@iste.edu.tr</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-globe"></i>
+                    <h4>Web</h4>
+                    <p><a href="https://www.iste.edu.tr" target="_blank">www.iste.edu.tr</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ISTEAPP - İskenderun Teknik Üniversitesi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot Balloon -->
+    <div id="chatbotBalloon" class="chatbot-balloon">
+        <div class="chatbot-header">
+            <span>İSTE Chatbot</span>
+            <button id="chatbotCloseBtn" class="chatbot-close-btn">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <form id="chatbotForm" class="chatbot-form">
+            <input type="text" id="chatbotInput" placeholder="Sorunuzu yazın..." autocomplete="off" required />
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+    <button id="chatbotOpenBtn" class="chatbot-open-btn"><i class="fas fa-robot"></i></button>
+
+    <!-- İçerik Modal -->
+    <div id="contentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <span class="modal-close" id="modalClose">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>İçerik yükleniyor...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
