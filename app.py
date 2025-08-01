@@ -193,7 +193,9 @@ HAFTALIK YEMEK MENÜSÜ:
         print(f"[LOG] Context uzunluğu: {len(rag_context)} karakter")
         
         # OpenAI API anahtarı
-        OPENAI_API_KEY=sk-xxxxxxx
+        OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', '')
+        if not OPENAI_API_KEY:
+            return jsonify({'reply': 'OpenAI API anahtarı bulunamadı. Lütfen sistem yöneticisi ile iletişime geçin.'})
         
         # Mesajları hazırla
         messages = [
@@ -240,4 +242,5 @@ Kurallar:
         return jsonify({'reply': f'Bir hata oluştu: {str(e)}'})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000) 
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port) 
