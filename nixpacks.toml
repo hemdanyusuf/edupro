@@ -3,13 +3,14 @@ nixPkgs = ["python311", "nodejs", "npm"]
 
 [phases.install]
 cmds = [
+  "python --version",
   "pip install --upgrade pip",
   "pip install -r requirements.txt",
   "playwright install --with-deps"
 ]
 
 [phases.build]
-cmds = ["echo 'Build completed'"]
+cmds = ["echo 'Build completed successfully'"]
 
 [start]
 cmd = "gunicorn --bind 0.0.0.0:$PORT app:app" 
